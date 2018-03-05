@@ -30,44 +30,52 @@ public class Player {
     private String namePlayer;
     private int deaths ; //--o Muertes
     private int bajas; //--o Bajas
-    private int assaults; //--o Asaltos
-    private int defenses ; //--o Defensas
+    private int wonAssaults; //--o Asaltos ganados
+    private int lostAssaults; //--o Asaltos perdidos
+    private int wonDefenses ; //--o Defensas ganadas
+    private int lostDefenses ; //--o Defensas perdidas
     private int executions ; //--o Ejecuciones
     private int spendingForRound ; //--o Gasto por ronda
 
-    Player(String namePlayer,int deaths, int bajas, int assaults, int defenses, int executions, int spendingForRound){
+    Player(String namePlayer,int deaths, int bajas, int wonAssaults, int lostAssaults, int wonDefenses, int lostDefenses, int executions, int spendingForRound){
         this.namePlayer = namePlayer;
         this.deaths = deaths;
         this.bajas = bajas;
-        this.assaults = assaults;
-        this.defenses = defenses;
+        this.wonAssaults = wonAssaults;
+        this.lostAssaults = lostAssaults;
+        this.wonDefenses = wonDefenses;
+        this.lostDefenses = lostDefenses;
         this.executions = executions;
         this.spendingForRound = spendingForRound;
     }
 
     //--o Ratio de bajas / muertes.
-    private float bajasDeath() {
+    protected float bajasDeath() {
         float rateBD = this.bajas / this.deaths;
         return rateBD;
     }
 
     //--o El total de Asaltos completados con éxito (porcentual).
-    private float wonAssaults() {
-        return 0.0F;
+    protected float wonAssaults() {
+        float totalWonAssaults ;
+        float calc = this.wonAssaults + this.lostAssaults;
+        float div = 100 / calc;
+        totalWonAssaults = this.wonAssaults * div;
+        return totalWonAssaults ;
     }
 
     //--o Media de ejecuciones por partida.
-    private float avgExecutions() {
+    protected float avgExecutions() {
         return 0.0F;
     }
 
     //--o Media de gasto por baja realizada.
-    private float avgSpendingForRound() {
+    protected float avgSpendingForRound() {
         return 0.0F;
     }
 
     //--o Calidad del jugador
-    private float qualityPlayer(){
+    protected float qualityPlayer(){
         return 0.0F;
     }
 
@@ -77,8 +85,10 @@ public class Player {
                 "namePlayer='" + namePlayer + '\'' +
                 ", deaths=" + deaths +
                 ", bajas=" + bajas +
-                ", assaults=" + assaults +
-                ", defenses=" + defenses +
+                ", wonAssaults=" + wonAssaults +
+                ", lostAssaults=" + lostAssaults +
+                ", wonDefenses=" + wonDefenses +
+                ", lostDefenses=" + lostDefenses +
                 ", executions=" + executions +
                 ", spendingForRound=" + spendingForRound +
                 '}';
